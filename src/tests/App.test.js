@@ -1,9 +1,9 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
-import { act } from 'react-dom/test-utils';
 
 test('testa se app possui os links corretos', () => {
   renderWithRouter(<App />);
@@ -38,9 +38,9 @@ describe('testa se a aplicação é redirecionada corretamente ao clicar em um d
   });
   test('Teste se a aplicação é redirecionada para a página Not Found ao entrar em uma URL desconhecida', () => {
     const { history } = renderWithRouter(<App />);
-    act (() => {
-  history.push('/hehe');
-    })
+    act(() => {
+      history.push('/hehe');
+    });
     const textNF = screen.getByRole('heading', { name: /page requested not found/i });
     expect(textNF).toBeInTheDocument();
   });
